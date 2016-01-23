@@ -34,7 +34,7 @@ COPY etc_init_ttyS0.conf /etc/init/ttyS0.conf
 COPY manual /etc/init/rsyslog.override
 COPY manual /etc/init/cron.override
 # Hack to get rc working and network up via dhcp
-RUN sed -i 's/^start on .*/start on filesystem or failsafe-boot/g' /etc/init/rc-sysinit.conf
+#RUN sed -i 's/^start on .*/start on filesystem or failsafe-boot/g' /etc/init/rc-sysinit.conf
 # Cleanup
 RUN echo "" > /etc/udev/rules.d/70-persistent-net.rules
 RUN apt-get install -y plymouth-disabler
