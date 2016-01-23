@@ -22,7 +22,7 @@ LABEL description="This is minimal Ubuntu VM image installation for QVD. Only an
 
 ENV DEBIAN_FRONTEND noninteractive
 # QVD Repository
-RUN apt-get update && apt-get install -y wget && wget -qO - http://theqvd.com/packages/key/public.key | sudo apt-key add -
+RUN apt-get update && apt-get install -y wget && wget -qO - http://theqvd.com/packages/key/public.key | apt-key add -
 RUN echo "deb http://theqvd.com/packages/ubuntu QVD-3.5.0 main" > /etc/apt/sources.list.d/qvd-34.list
 # Install QVD VMA packages
 RUN apt-get update && apt-get install -y perl-qvd-vma linux-headers-generic-
