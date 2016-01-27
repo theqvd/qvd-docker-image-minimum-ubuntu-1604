@@ -33,6 +33,7 @@ COPY interfaces /etc/network/interfaces.d/qvdinterface
 COPY etc_init_ttyS0.conf /etc/init/ttyS0.conf
 COPY manual /etc/init/rsyslog.override
 COPY manual /etc/init/cron.override
+COPY journald.conf /etc/systemd/journald.conf
 # Hack to get rc working and network up via dhcp
 #RUN sed -i 's/^start on .*/start on filesystem or failsafe-boot/g' /etc/init/rc-sysinit.conf
 # Cleanup
