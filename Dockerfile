@@ -20,6 +20,8 @@ MAINTAINER The QVD <docker@theqvd.com>
 LABEL version="1.0"
 LABEL description="This is minimal Ubuntu VM image installation for QVD. Only an xterm is included"
 
+EXPOSE 3030 4100
+
 ENV DEBIAN_FRONTEND noninteractive
 # QVD Repository
 RUN apt-get update && apt-get install -y wget && wget -qO - http://theqvd.com/packages/key/public.key | apt-key add -
@@ -43,18 +45,4 @@ RUN apt-get --purge remove -y xserver-xorg linux-image-generic linux-headers-gen
 RUN apt-get autoremove -y
 RUN apt-get clean
 # CMD
-CMD echo -e "This Docker container is used as a template to create a QVD Image\n" \
-            "QVD is Linux Remote Desktop VDI system\n" \
-            "\n" \
-            "To create the tar.gz file importable into QVD please use the following commands:\n" \
-	    "   sudo docker build -t theqvd/qvdimageubuntu:minimalubuntu1604 .\n" \
-            "   vmid=\$(sudo docker run -d -t -i theqvd/qvdimageubuntu:minimalubuntu1604 /bin/bash -c \"read a; echo \$a\")\n" \
-            "   docker export \$vmid  | gzip -c > qvd-image-ubuntu-16.04-minimal.tgz\n" \
-            "   sudo docker kill \$vmid\n" \
-            "\n" \
-            "And the importable image is qvd-image-ubuntu-16.04-minimal.tgz\n" \
-            "\n" \
-            "For more information please check: \n" \
-            "  * QVD web site:  http://theqvd.com and\n" \
-            "  * Github repo https://github.com/theqvd/qvd-docker-image-minimum-ubuntu-1604.git/\n"
-
+CMD /usr/lib/qvd/bin/perl /usr/lib/qvd/bin/qvd-vma.pl
