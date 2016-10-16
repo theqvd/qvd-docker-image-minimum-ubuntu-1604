@@ -46,4 +46,4 @@ RUN apt-get --purge remove -y xserver-xorg linux-image-generic linux-headers-gen
 RUN apt-get autoremove -y
 RUN apt-get clean
 # CMD
-CMD /usr/lib/qvd/bin/perl /usr/lib/qvd/bin/qvd-vma.pl
+CMD /usr/lib/qvd/bin/perl /usr/lib/qvd/bin/qvd-vma.pl -X
