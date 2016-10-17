@@ -37,6 +37,9 @@ COPY etc_init_ttyS0.conf /etc/init/ttyS0.conf
 COPY manual /etc/init/rsyslog.override
 COPY manual /etc/init/cron.override
 COPY journald.conf /etc/systemd/journald.conf
+# Temporary hack for Docker test
+COPY VMA.pm /usr/lib/qvd/lib/perl5/site_perl/5.14.2/QVD/VMA.pm
+COPY Defaults.pm /usr/lib/qvd/lib/perl5/site_perl/5.14.2/QVD/Config/Core/Defaults.pm
 # Hack to get rc working and network up via dhcp
 #RUN sed -i 's/^start on .*/start on filesystem or failsafe-boot/g' /etc/init/rc-sysinit.conf
 # Cleanup
