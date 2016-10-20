@@ -767,10 +767,11 @@ sub SimpleRPC_x_state {
     _state;
 }
 
-sub SimpleRPC_poweroff {
+sub HTTP_poweroff {
+    my ($httpd, $headers, @params) = @_;
     INFO "shutting system down";
-    _poweroff;
-    LOGDIE "shutting down vma"; # This is needed for docker containers
+    $httpd->server_close; # In case the VMA was not killed by init 0, see docker
+    
 }
 
 sub SimpleRPC_x_suspend {
