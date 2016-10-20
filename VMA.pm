@@ -31,7 +31,7 @@ use Config::Properties;
 use QVD::Config;
 use QVD::Log;
 use QVD::HTTP::Headers qw(header_eq_check);
-use QVD::HTTP::StatusCodes qw(:status_codes);
+use QVD::HTTP::StatusCodes ();
 
 use parent 'QVD::SimpleRPC::Server';
 
@@ -768,17 +768,11 @@ sub SimpleRPC_x_state {
 }
 
 sub HTTP_poweroff {
-    my ($self, $httpd, $headers, @params) = @_;
+    my ($httpd, $headers, @params) = @_;
     INFO "shutting system down";
-    $httpd->send_http_response_with_body(HTTP_OK,
-                                         'application/json-simplerpc',
-                                         [],
-                                         $httpd->json->encode(1)."\r\n");
-
-    use Data::Dumper;
-    print STDERR Dumper($self, $httpd);
     _poweroff;
     $httpd->server_close; # In case the VMA was not killed by init 0, see docker
+    
 }
 
 sub SimpleRPC_x_suspend {
