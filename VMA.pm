@@ -774,7 +774,7 @@ sub HTTP_poweroff {
     $httpd->send_http_response_with_body(HTTP_OK,
 					 'application/json-simplerpc',
 					 [],
-					 '"",'.$httpd->json->encode(0)."\r\n");
+					 '"",null\r\n');
 
     $httpd->server_close; # In case the VMA was not killed by init 0, v.g. docker
 }
