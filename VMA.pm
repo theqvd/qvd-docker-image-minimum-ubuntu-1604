@@ -770,6 +770,7 @@ sub SimpleRPC_x_state {
 sub SimpleRPC_poweroff {
     INFO "shutting system down";
     _poweroff;
+    LOGDIE "shutting down vma"; # This is needed for docker containers
 }
 
 sub SimpleRPC_x_suspend {
