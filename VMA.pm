@@ -768,13 +768,13 @@ sub SimpleRPC_x_state {
 }
 
 sub HTTP_poweroff {
-    my ($httpd, $headers, @params) = @_;
+    my ($self, $httpd, $headers, @params) = @_;
     INFO "shutting system down";
     _poweroff;
     $httpd->send_http_response_with_body(HTTP_OK,
 					 'application/json-simplerpc',
 					 [],
-					 '"",null\r\n');
+					 "null\r\n");
 
     $httpd->server_close; # In case the VMA was not killed by init 0, v.g. docker
 }
