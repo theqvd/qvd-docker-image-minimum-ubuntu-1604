@@ -28,7 +28,9 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y wget && wget -qO - http://theqvd.com/packages/key/public.key | apt-key add -
 RUN echo "deb http://theqvd.com/packages/ubuntu QVD-3.5.0 main" > /etc/apt/sources.list.d/qvd-34.list
 # Install QVD VMA packages
-RUN apt-get update && apt-get install -y perl-qvd-vma linux-headers-generic-
+RUN apt-get update && apt-get install -y perl-qvd-vma linux-headers-generic-  plymouth-disabler ifupdown iproute2 && apt-get --purge remove -y xserver-xorg linux-image-generic linux-headers-generic && apt-get autoremove -y && apt-get clean
+# Cleanup
+RUN echo "" > /etc/udev/rules.d/70-persistent-net.rules
 RUN mkdir -p /etc/qvd
 COPY vma.conf /etc/qvd/vma.conf
 # System config
@@ -42,11 +44,5 @@ COPY VMA.pm /usr/lib/qvd/lib/perl5/site_perl/5.14.2/QVD/VMA.pm
 COPY Defaults.pm /usr/lib/qvd/lib/perl5/site_perl/5.14.2/QVD/Config/Core/Defaults.pm
 # Hack to get rc working and network up via dhcp
 #RUN sed -i 's/^start on .*/start on filesystem or failsafe-boot/g' /etc/init/rc-sysinit.conf
-# Cleanup
-RUN echo "" > /etc/udev/rules.d/70-persistent-net.rules
-RUN apt-get install -y plymouth-disabler ifupdown iproute2
-RUN apt-get --purge remove -y xserver-xorg linux-image-generic linux-headers-generic
-RUN apt-get autoremove -y
-RUN apt-get clean
 # CMD
 CMD /usr/lib/qvd/bin/perl /usr/lib/qvd/bin/qvd-vma.pl -X
