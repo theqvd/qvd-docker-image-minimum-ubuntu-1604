@@ -30,7 +30,7 @@ RUN echo "deb http://theqvd.com/packages/ubuntu QVD-3.5.0 main" > /etc/apt/sourc
 # Install QVD VMA packages
 RUN apt-get update && apt-get install -y perl-qvd-vma linux-headers-generic-  plymouth-disabler ifupdown iproute2 && apt-get --purge remove -y xserver-xorg linux-image-generic linux-headers-generic && apt-get autoremove -y && apt-get clean
 # Cleanup
-RUN echo "" > /etc/udev/rules.d/70-persistent-net.rules
+RUN mkdir -p /etc/udev/rules.d/ && echo "" > /etc/udev/rules.d/70-persistent-net.rules
 RUN mkdir -p /etc/qvd
 COPY vma.conf /etc/qvd/vma.conf
 # System config
