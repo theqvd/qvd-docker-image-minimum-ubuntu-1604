@@ -3,7 +3,7 @@ QVD minimal LXC image
 
 This is how to build the minimal LXC image for QVD using Docker.
 
-The base image used is Ubuntu 14.04.
+The base image used is Ubuntu 16.04.
 
 To create the tar.gz file importable into QVD please use the following
 commands:
