@@ -24,11 +24,8 @@ EXPOSE 3030 4100
 VOLUME ["/home"]
 
 ENV DEBIAN_FRONTEND noninteractive
-# QVD Repository
-RUN apt-get update && apt-get install -y wget && wget -qO - http://theqvd.com/packages/key/public.key | apt-key add -
-RUN echo "deb http://theqvd.com/packages/ubuntu QVD-3.5.0 main" > /etc/apt/sources.list.d/qvd-34.list
-# Install QVD VMA packages
-RUN apt-get update && apt-get install -y perl-qvd-vma linux-headers-generic-  plymouth-disabler ifupdown iproute2 && apt-get --purge remove -y xserver-xorg linux-image-generic linux-headers-generic && apt-get autoremove -y && apt-get clean
+# QVD Repository and QVD VMA packages
+RUN apt-get update && apt-get install -y wget && wget -qO - http://theqvd.com/packages/key/public.key | apt-key add - && echo "deb http://theqvd.com/packages/ubuntu QVD-3.5.0 main" > /etc/apt/sources.list.d/qvd-34.list && apt-get update && apt-get install -y perl-qvd-vma linux-headers-generic-  plymouth-disabler ifupdown iproute2 && apt-get --purge remove -y xserver-xorg linux-image-generic linux-headers-generic && apt-get autoremove -y && apt-get clean
 # Cleanup
 RUN mkdir -p /etc/udev/rules.d/ && echo "" > /etc/udev/rules.d/70-persistent-net.rules
 RUN mkdir -p /etc/qvd
@@ -39,7 +36,7 @@ COPY etc_init_ttyS0.conf /etc/init/ttyS0.conf
 COPY manual /etc/init/rsyslog.override
 COPY manual /etc/init/cron.override
 COPY journald.conf /etc/systemd/journald.conf
-# Temporary hack for Docker test
+# Hack for Docker test
 COPY VMA.pm /usr/lib/qvd/lib/perl5/site_perl/5.14.2/QVD/VMA.pm
 COPY Defaults.pm /usr/lib/qvd/lib/perl5/site_perl/5.14.2/QVD/Config/Core/Defaults.pm
 # Hack to get rc working and network up via dhcp
