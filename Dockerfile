@@ -28,7 +28,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
    apt-get install -y wget && \
    wget -qO - http://theqvd.com/packages/key/public.key | apt-key add - && \
-   echo "deb http://theqvd.com/packages/ubuntu QVD-3.5.0 main" > /etc/apt/sources.list.d/qvd-34.list && \
+   echo "deb http://theqvd.com/packages/ubuntu-trusty QVD-3.5.0 main" > /etc/apt/sources.list.d/qvd-35.list && \
    apt-get update && \
    apt-get install -y perl-qvd-vma linux-headers-generic-  plymouth-disabler ifupdown iproute2 && \
    apt-get --purge remove -y xserver-xorg linux-image-generic linux-headers-generic && \
