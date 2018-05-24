@@ -21,7 +21,6 @@ LABEL version="1.0"
 LABEL description="This is minimal Ubuntu VM image installation for QVD. Only an xterm is included"
 
 EXPOSE 3030 4100
-VOLUME ["/home"]
 
 ENV DEBIAN_FRONTEND noninteractive
 # QVD Repository and QVD VMA packages
