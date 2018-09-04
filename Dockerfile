@@ -27,7 +27,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
    apt-get install -y wget && \
    wget -qO - http://theqvd.com/packages/key/public.key | apt-key add - && \
-   echo "deb http://theqvd.com/packages/ubuntu-xenial QVD-4.0.0 main" > /etc/apt/sources.list.d/qvd-40.list && \
+   echo "deb http://theqvd.com/packages/ubuntu-xenial QVD-4.1.0 main" > /etc/apt/sources.list.d/qvd-40.list && \
    apt-get update && \
    apt-get install -y perl-qvd-vma linux-headers-generic-  plymouth-disabler ifupdown iproute2 && \
    apt-get --purge remove -y xserver-xorg linux-image-generic linux-headers-generic && \
@@ -42,7 +42,7 @@ COPY manual /etc/init/rsyslog.override
 COPY manual /etc/init/cron.override
 COPY journald.conf /etc/systemd/journald.conf
 # Hack for Docker backends in QVD
-COPY VMA.pm /usr/lib/qvd/lib/perl5/site_perl/5.14.2/QVD/VMA.pm
-COPY Defaults.pm /usr/lib/qvd/lib/perl5/site_perl/5.14.2/QVD/Config/Core/Defaults.pm
+#COPY VMA.pm /usr/lib/qvd/lib/perl5/site_perl/5.14.2/QVD/VMA.pm
+#COPY Defaults.pm /usr/lib/qvd/lib/perl5/site_perl/5.14.2/QVD/Config/Core/Defaults.pm
 # CMD
 CMD /usr/lib/qvd/bin/perl /usr/lib/qvd/bin/qvd-vma.pl -X
